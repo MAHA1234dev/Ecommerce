@@ -1,20 +1,131 @@
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, ViewBase, DefaultTheme, ImageBackground, TouchableOpacity } from 'react-native';
+import Home from "./components/home";
+import DrawerContent from "./components/DrawerContent";
+import AllCategories from "./components/AllCategories";
+import MyAccount from "./components/MyAccount";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import MyOrder from "./components/MyOrder";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import MyCart from "./components/MyCart";
+import Notifications from "./components/Notifications";
+import { Divider, useTheme } from "@rneui/themed";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
+  function CustomDrawerContent(props) {
+    const { theme } = useTheme();
+    const { state, descriptors, navigation } = props;
+    return (
+      <View style={{ flex: 1 }}>
+        <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: '#61dafb' }}>
+          <ImageBackground
+            source={require('./assets/profile.png')}
+            style={{ padding: 20 }}
+          >
+            <View style={{ flexDirection: 'row', justifyContent: "flex-start", }}>
+              <Image
+                source={require('./assets/maha.png')}
+                style={{ height: 70, width: 80, borderRadius: 50 }}
+              >
+              </Image>
+              <View style={{ width: 100, marginLeft: 10, flexDirection: "column", justifyContent: "flex-start" }}>
+                <Text style={{
+                  marginTop: 20,
+                  color: "#FFFFFF",
+                  fontSize: 18
+                }}>Mahadev N</Text>
+                <Text style={{
+                  color: "#FFFFFF",
+                  fontSize: 10
+                }}>mnedode5@gmail.com</Text>
+              </View>
+            </View>
+          </ImageBackground>
+          <View style={{ flex: 1, backgroundColor: "#FFFFFF", padding: 10 }}>
+            {state.routes.map((route, index) => {
+              const { options } = descriptors[route.key];
+              const label =
+                options.drawerLabel !== undefined
+                  ? options.drawerLabel
+                  : options.title !== undefined
+                    ? options.title
+                    : route.name;
+
+              // Render your desired component for each item in the drawer
+              // if (label === 'Home') {
+              //   return (
+              //     <Text key={index} onPress={() => navigation.navigate(route.name)}>
+              //       Home
+              //     </Text>
+              //   );
+              // }
+              return (
+                <View style={{ flexDirection: "column", padding: 15 }}>
+                  <View style={{ flexDirection: 'row', justifyContent: "flex-start", alignItems: 'center' }}>
+                    <Icon
+                      name={`${label === "Home" ? "home" : label === "All Categories" ? "category" :
+                        label === "My Account" ? "account-box" : label === "My Order" ? "https" : label === "My Cart" ? "shopping-basket" : "notifications"}`}
+                      size={25}
+                    />
+                    <Text style={styles.content} key={index} onPress={() => navigation.navigate(route.name)}>
+                      {label}
+                    </Text>
+                  </View>
+                  {/* <TouchableOpacity
+                    key={index} onPress={() => navigation.navigate(route.name)}
+                  >
+                    <Text>{label}</Text>
+                  </TouchableOpacity> */}
+                </View>
+              );
+            })}
+          </View>
+          <View>
+            <Divider width={1} color={theme?.colors?.primary}  />
+          </View>
+        </DrawerContentScrollView>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props} />}>
+        <Drawer.Screen
+          name="Home"
+          component={Home}
+          options={{ //change the configuration of our screen
+            drawerIcon: ({ color, number, focused }) => { //set the icon:
+              return ( //the icon will be an image
+                <Image
+                  source={require("./assets/favicon.png")}
+                  style={{ height: 30, width: 30, backgroundColor: "#61dafb" }}
+                />
+              );
+            },
+          }}
+        />
+        <Drawer.Screen name="All Categories" component={AllCategories} />
+        <Drawer.Screen name="My Account" component={MyAccount} />
+        <Drawer.Screen name="My Order" component={MyOrder} />
+        <Drawer.Screen name="My Cart" component={MyCart} />
+        <Drawer.Screen name="Notifications" component={Notifications} />
+      </Drawer.Navigator>
+      <StatusBar
+        backgroundColor="#61dafb"
+      />
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  content: {
+    fontSize: 16,
+    fontWeight: "400",
+    marginLeft: 8,
+  }
 });
