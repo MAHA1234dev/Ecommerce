@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MyCart from "./components/MyCart";
 import Notifications from "./components/Notifications";
 import { Divider, useTheme } from "@rneui/themed";
+import BottomTabs from "./navigation/BottomTabs";
 
 const Drawer = createDrawerNavigator();
 
@@ -32,9 +33,9 @@ export default function App() {
                 style={{ height: 70, width: 80, borderRadius: 50 }}
               >
               </Image>
-              <View style={{ width: 100, marginLeft: 10, flexDirection: "column", justifyContent: "flex-start" }}>
+              <View style={{ marginLeft: 10, flexDirection: "column", justifyContent: "center", }}>
                 <Text style={{
-                  marginTop: 20,
+                  // marginTop: 20,
                   color: "#FFFFFF",
                   fontSize: 18
                 }}>Mahadev N</Text>
@@ -64,7 +65,7 @@ export default function App() {
               //   );
               // }
               return (
-                <View style={{ flexDirection: "column", padding: 15 }}>
+                <View style={{ flexDirection: "column", padding: 15 }} key={index}>
                   <View style={{ flexDirection: 'row', justifyContent: "flex-start", alignItems: 'center' }}>
                     <Icon
                       name={`${label === "Home" ? "home" : label === "All Categories" ? "category" :
@@ -84,41 +85,75 @@ export default function App() {
               );
             })}
           </View>
-          <View>
-            <Divider width={1} color={theme?.colors?.primary}  />
+          <View style={{ backgroundColor: "#FFFFFF" }}>
+            <Divider width={1} color={theme?.colors?.primary} />
+            <View style={{ flexDirection: "column", padding: 15, marginLeft: 15 }}>
+              <Text style={styles.other}>Other</Text>
+              <Text style={styles.others}>Terms & conditions</Text>
+              <Text style={styles.others}>Privacy Policy</Text>
+            </View>
           </View>
         </DrawerContentScrollView>
       </View>
     );
   }
 
+  const LogoTitle = ({ navigation }) => {
+    return (
+      <View style={styles.logo}>
+        <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", }}>
+          <Image
+            source={require('./assets/logo.png')}
+            style={{ height: 25, width: 25, borderRadius: 50 }}
+          ></Image>
+          <Text style={styles.pname}>Maha</Text>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Icon name="add-shopping-cart" size={25} color="#FFFFFF" onPress={() => navigation.navigate('My Cart')} />
+          <Icon name="notifications" size={25} color="#FFFFFF" style={{ marginLeft: 10 }} onPress={() => navigation.navigate('Notifications')} />
+        </View>
+      </View>
+    )
+  }
+
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen
-          name="Home"
-          component={Home}
-          options={{ //change the configuration of our screen
-            drawerIcon: ({ color, number, focused }) => { //set the icon:
-              return ( //the icon will be an image
-                <Image
-                  source={require("./assets/favicon.png")}
-                  style={{ height: 30, width: 30, backgroundColor: "#61dafb" }}
-                />
-              );
+    <>
+      <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName="Home"
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#61dafb',
             },
           }}
+        >
+          {/* <Drawer.Screen name="Home" component={BottomTabs} /> */}
+          <Drawer.Screen
+            name="Home"
+            component={Home}
+            options={({ navigation }) => ({
+              // title: "Maha",
+              headerStyle: {
+                backgroundColor: "#61dafb",
+              },
+              // headerTitleStyle: {
+              //   fontWeight: 'bold',
+              // },
+              headerTitle: (props) => <LogoTitle {...props} navigation={navigation} />
+            })}
+          />
+          <Drawer.Screen name="All Categories" component={AllCategories} />
+          <Drawer.Screen name="My Account" component={MyAccount} />
+          <Drawer.Screen name="My Order" component={MyOrder} />
+          <Drawer.Screen name="My Cart" component={MyCart} />
+          <Drawer.Screen name="Notifications" component={Notifications} />
+        </Drawer.Navigator>
+        <StatusBar
+          backgroundColor="#14c6f7"
         />
-        <Drawer.Screen name="All Categories" component={AllCategories} />
-        <Drawer.Screen name="My Account" component={MyAccount} />
-        <Drawer.Screen name="My Order" component={MyOrder} />
-        <Drawer.Screen name="My Cart" component={MyCart} />
-        <Drawer.Screen name="Notifications" component={Notifications} />
-      </Drawer.Navigator>
-      <StatusBar
-        backgroundColor="#61dafb"
-      />
-    </NavigationContainer>
+      </NavigationContainer>
+    </>
   );
 }
 
@@ -127,5 +162,28 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
     marginLeft: 8,
+  },
+  other: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#D3D3D3"
+  },
+  others: {
+    fontSize: 16,
+    fontWeight: "400",
+    marginTop: 10
+  },
+  pname: {
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 25,
+    color: "#FFFFFF",
+    paddingLeft: 10
+  },
+  logo: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   }
 });
