@@ -116,15 +116,25 @@ export default function App() {
     )
   }
 
+  const RenderHeader = (props) => {
+    return (
+      <View>
+        <Text style={styles.pname}>{props.title}</Text>
+      </View>
+
+    )
+  }
   return (
     <>
       <NavigationContainer>
         <Drawer.Navigator
           initialRouteName="Home"
           drawerContent={(props) => <CustomDrawerContent {...props} />}
+          drawerHideStatusBarOnOpen={true}
           screenOptions={{
             headerStyle: {
               backgroundColor: '#61dafb',
+
             },
           }}
         >
@@ -133,13 +143,6 @@ export default function App() {
             name="Home"
             component={Home}
             options={({ navigation }) => ({
-              // title: "Maha",
-              headerStyle: {
-                backgroundColor: "#61dafb",
-              },
-              // headerTitleStyle: {
-              //   fontWeight: 'bold',
-              // },
               headerTitle: (props) => <LogoTitle {...props} navigation={navigation} />
             })}
           />
@@ -147,7 +150,14 @@ export default function App() {
           <Drawer.Screen name="My Account" component={MyAccount} />
           <Drawer.Screen name="My Order" component={MyOrder} />
           <Drawer.Screen name="My Cart" component={MyCart} />
-          <Drawer.Screen name="Notifications" component={Notifications} />
+          <Drawer.Screen
+            name="Notifications"
+            component={Notifications}
+            options={({ navigation }) => ({
+              // headerShown : false,
+              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Notifications"} />
+            })}
+          />
         </Drawer.Navigator>
         <StatusBar
           backgroundColor="#14c6f7"

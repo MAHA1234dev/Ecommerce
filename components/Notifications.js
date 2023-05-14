@@ -1,9 +1,9 @@
-import { View,Text } from "react-native";
+import { View, Text } from "react-native";
 
-function Notifications() {
+function Notifications({ navigation }) {
     return (
-        <View>
-            <Text>xvsdsdbvshfs efbdhned</Text>
+        <View style={{ flex: 4 }}>
+            <Text>ascbhkjab wqdef </Text>
         </View>
     )
 }
