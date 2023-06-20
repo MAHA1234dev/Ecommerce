@@ -100,15 +100,15 @@ export default function App() {
 
   const LogoTitle = ({ navigation }) => {
     return (
-      <View style={styles.logo}>
-        <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+        <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center", }}>
           <Image
             source={require('./assets/logo.png')}
             style={{ height: 25, width: 25, borderRadius: 50 }}
           ></Image>
           <Text style={styles.pname}>Maha</Text>
         </View>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end", alignItems: "center", }}>
           <Icon name="add-shopping-cart" size={25} color="#FFFFFF" onPress={() => navigation.navigate('My Cart')} />
           <Icon name="notifications" size={25} color="#FFFFFF" style={{ marginLeft: 10 }} onPress={() => navigation.navigate('Notifications')} />
         </View>
@@ -188,12 +188,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 25,
     color: "#FFFFFF",
-    paddingLeft: 10
+    paddingLeft: 3
   },
-  logo: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  }
 });

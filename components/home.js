@@ -79,7 +79,7 @@ function Home({ navigation }) {
             offer: "50%",
             price: "10000",
             uri: require('../assets/casuals.png')
-        }
+        },
     ]
 
     const handlePress = () => {
@@ -128,7 +128,7 @@ function Home({ navigation }) {
                     </View>
                     <Divider width={1} color={theme?.colors?.primary} />
                     <View style={{
-                        flexDirection: 'row', width: '100%', justifyContent: "space-between", flexWrap: "wrap",
+                        flexDirection: 'row', width: '100%', flexWrap: "wrap",
                     }}>
                         {
                             specialDeals.map((val, i) => {
@@ -194,12 +194,13 @@ const styles = StyleSheet.create({
     },
     surface: {
         marginTop: 8,
-        width: "48%",
+        // width: "48%",
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
         backgroundColor: "#E9F8FA",
-        padding: 20
+        padding: 20,
+        marginLeft: 8
     }
 });
 
