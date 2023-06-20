@@ -115,7 +115,7 @@ function Home({ navigation }) {
                         {
                             cardCoves.map((val, i) => {
                                 return (
-                                    <Card.Cover style={styles.cardCovers} source={uri = val.uri} key={i} />
+                                    <Card.Cover style={styles.cardCovers} source={val?.uri} key={i} />
                                 )
                             })
                         }

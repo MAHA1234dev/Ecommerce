@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Divider, useTheme, Button } from "@rneui/themed";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Address from "./subComponents/Address";
+import Payment from "./subComponents/Payment";
 
 const cartItems = [
     {
@@ -34,12 +35,14 @@ const address = [
     {
         deliveryTo: "Mahadev",
         pincode: 560102,
-        address: "PSR boys pg, 13th cross Road, 560102, 19th Main Road Sector 4 HSR Layout..."
+        address: "PSR boys pg, 13th cross Road, 560102, 19th Main Road Sector 4 HSR Layout...",
+        phoneNo: "8861601472",
     },
     {
-        deliveryTo: "Mahadev",
+        deliveryTo: "Alok",
         pincode: 560102,
-        address: "PSR boys pg, 14th cross Road, 560102, 10th Main Road Sector 7 HSR Layout..."
+        address: "PSR boys pg, 14th cross Road, 560102, 10th Main Road Sector 7 HSR Layout...",
+        phoneNo: "7204038784"
     },
 ]
 
@@ -47,9 +50,14 @@ function MyCart() {
 
     const [stepper, setStepper] = useState(1)
     const { theme } = useTheme();
+    const [addressData, setAddressData] = useState([...address]);
 
     const handlPlaceOrder = () => {
-        setStepper(2)
+        setStepper(stepper + 1);
+    }
+
+    const handleChip = (val) => {
+        setStepper(val);
     }
 
     return (
@@ -57,18 +65,18 @@ function MyCart() {
             <ScrollView style={{ backgroundColor: "#61dafb", }}>
                 <View style={styles.body}>
                     <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", padding: 10 }}>
-                        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                            <Chip style={[stepper === 1 ? styles.pressChip : styles.chip]}>1</Chip>
+                        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }} >
+                            <Chip style={[stepper === 1 ? styles.pressChip : styles.chip]} onPress={() => handleChip(1)} >1</Chip>
                             <Text style={[stepper === 1 ? styles.action : styles.silent]}>Bag</Text>
                         </View>
                         <View style={styles.line}></View>
-                        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                            <Chip style={[stepper === 2 ? styles.pressChip : styles.chip]}>2</Chip>
+                        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }} >
+                            <Chip style={[stepper === 2 ? styles.pressChip : styles.chip]} onPress={() => handleChip(2)} >2</Chip>
                             <Text style={[stepper === 2 ? styles.action : styles.silent]}>Address</Text>
                         </View>
                         <View style={styles.line}></View>
-                        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                            <Chip style={[stepper === 3 ? styles.pressChip : styles.chip]}>3</Chip>
+                        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}  >
+                            <Chip style={[stepper === 3 ? styles.pressChip : styles.chip]} onPress={() => handleChip(3)}>3</Chip>
                             <Text style={[stepper === 3 ? styles.action : styles.silent]}>Payment</Text>
                         </View>
                     </View>
@@ -79,7 +87,7 @@ function MyCart() {
                                 <View style={{ padding: 5, flexDirection: "row", width: "100%", justifyContent: "center", alignItems: "center" }}>
                                     <View style={{ width: "80%" }}>
                                         {
-                                            [address[0]].map((val, i) => {
+                                            [addressData[0]].map((val, i) => {
                                                 return (
                                                     <View key={i} >
                                                         <View key={i} style={{ flexDirection: "row", justifyContent: "flex-start" }}>
@@ -93,7 +101,7 @@ function MyCart() {
                                         }
                                     </View>
                                     <View style={{ width: "20%", paddingLeft: 5 }}>
-                                        <Text style={styles.seeAll}>Change</Text>
+                                        <Text onPress={() => setStepper(2)} style={styles.seeAll}>Change</Text>
                                     </View>
                                 </View>
                                 <Divider width={1} color={theme?.colors?.primary} ></Divider>
@@ -156,8 +164,13 @@ function MyCart() {
                                 </View>
                             </>
                         ) : stepper === 2 ? (
-                            <Address />
-                        ) : ""
+                            <Address
+                                address={addressData}
+                                setAddressData={setAddressData}
+                            />
+                        ) : (
+                            <Payment />
+                        )
                     }
 
                 </View>
@@ -185,15 +198,21 @@ const styles = StyleSheet.create({
     },
     pressChip: {
         backgroundColor: "#61dafb",
-        width: 40,
+        width: 41,
         height: 40,
-        borderRadius: 100
+        borderRadius: 100,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     },
     chip: {
         backgroundColor: "#CAD2D3",
-        width: 40,
+        width: 41,
         height: 40,
-        borderRadius: 100
+        borderRadius: 100,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     },
     line: {
         width: 100,
