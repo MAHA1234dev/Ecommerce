@@ -62,7 +62,7 @@ function MyCart() {
 
     return (
         <View style={{ height: "100%" }}>
-            <ScrollView style={{ backgroundColor: "#61dafb", }}>
+            <ScrollView style={{ backgroundColor: "#61dafb" }}>
                 <View style={styles.body}>
                     <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", padding: 10 }}>
                         <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }} >

@@ -1,6 +1,6 @@
-import { Divider, useTheme } from "@rneui/themed";
+import { Button, Divider, useTheme } from "@rneui/themed";
 import { useState } from "react";
-import { Button, SafeAreaView, Text, TextInput } from "react-native";
+import { ImageBackground, SafeAreaView, Text, TextInput } from "react-native";
 import { View, Modal, StyleSheet } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -27,7 +27,7 @@ function AddressModal({ open, setOpen, setAddressData, address }) {
             onRequestClose={() => {
                 setOpen(false)
             }}>
-            <View style={styles.centeredView}>
+            <ImageBackground style={styles.centeredView} source={require('../../assets/profile.png')}>
                 <View style={styles.modalView}>
                     <View style={styles.header}>
                         <Text style={styles.modalText}>Add New Address</Text>
@@ -81,13 +81,13 @@ function AddressModal({ open, setOpen, setAddressData, address }) {
                             keyboardType="default"
                         />
                     </SafeAreaView>
-                    <Button color={"rgb(33 197 243)"}
+                    <Button
+                        color={"rgb(33 197 243)"}
                         title={"Add New Address"}
-                        buttonStyle={styles.button}
                         onPress={handleNewAddress}
                     ></Button>
                 </View>
-            </View>
+            </ImageBackground>
         </Modal>
     )
 }
@@ -128,11 +128,6 @@ const styles = StyleSheet.create({
         borderColor: "#d4d5d9",
         padding: 10,
         borderRadius: 5
-    },
-    button: {
-        margin: 1,
-        height: 30,
-        borderWidth: 1,
     },
 })
 
