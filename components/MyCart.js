@@ -53,7 +53,11 @@ function MyCart() {
     const [addressData, setAddressData] = useState([...address]);
 
     const handlPlaceOrder = () => {
-        setStepper(stepper + 1);
+        if (stepper === 3) {
+            setStepper(3)
+        } else {
+            setStepper(stepper + 1);
+        }
     }
 
     const handleChip = (val) => {
@@ -177,7 +181,7 @@ function MyCart() {
             </ScrollView>
             <View>
                 <Button
-                    title={"Place Order"}
+                    title={stepper === 2 ? "Countinue" : stepper === 3 ? "Choose payment Method" : "Place Order"}
                     buttonStyle={{
                         width: '100%',
                         height: 45,
@@ -186,7 +190,7 @@ function MyCart() {
                     onPress={handlPlaceOrder}
                 ></Button>
             </View>
-        </View>
+        </View >
     )
 }
 
