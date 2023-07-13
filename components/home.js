@@ -86,6 +86,10 @@ function Home({ navigation }) {
         navigation.navigate('Notifications')
     }
 
+    const handleSeeAll = () => {
+        navigation.navigate('All Categories')
+    }
+
     return (
         <ScrollView style={{ backgroundColor: "#61dafb" }}>
             <SafeAreaView style={styles.conatiner}>
@@ -124,7 +128,7 @@ function Home({ navigation }) {
                 <Card style={styles.subCard} contentStyle={{ padding: 10 }}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 8 }}>
                         <Text style={styles.headLines}>Special Deals</Text>
-                        <Text style={styles.seeAll} >Sel All</Text>
+                        <Text style={styles.seeAll} onPress={handleSeeAll} >Sel All</Text>
                     </View>
                     <Divider width={1} color={theme?.colors?.primary} />
                     <View style={{
