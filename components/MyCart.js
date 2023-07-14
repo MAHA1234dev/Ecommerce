@@ -176,10 +176,9 @@ function MyCart() {
                             <Payment />
                         )
                     }
-
                 </View>
             </ScrollView>
-            <View>
+            <View >
                 <Button
                     title={stepper === 2 ? "Countinue" : stepper === 3 ? "Choose payment Method" : "Place Order"}
                     buttonStyle={{

@@ -37,7 +37,7 @@ function Notifications({ navigation }) {
     ]
 
     return (
-        <View style={{ height: "100%" }}>
+        <View style={{}}>
             <ScrollView style={{ backgroundColor: "#61dafb" }}>
                 <View style={styles.body}>
                     {

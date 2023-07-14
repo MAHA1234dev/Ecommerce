@@ -10,7 +10,7 @@ function MyAccount({ navigation }) {
         Alert.alert('Log out', 'Are you sure you want exit the app ?', [
             {
                 text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
+                onPress: () => { },
                 style: 'cancel',
             },
             { text: 'OK', onPress: () => navigation.navigate("Home") },
@@ -18,7 +18,7 @@ function MyAccount({ navigation }) {
     }
 
     return (
-        <View style={{ height: "100%" }}>
+        <View style={{  }}>
             <ScrollView style={{ backgroundColor: "#61dafb" }}>
                 <View style={{ flexDirection: 'row', justifyContent: "space-between", alignItems: "center", padding: 25 }}>
                     <View style={{ flexDirection: "row" }}>
