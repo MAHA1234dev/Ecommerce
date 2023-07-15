@@ -1,9 +1,8 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, ViewBase, DefaultTheme, ImageBackground, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ImageBackground } from 'react-native';
 import Home from "./components/home";
-import DrawerContent from "./components/DrawerContent";
 import AllCategories from "./components/AllCategories";
 import MyAccount from "./components/MyAccount";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
@@ -12,8 +11,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MyCart from "./components/MyCart";
 import Notifications from "./components/Notifications";
 import { Divider, useTheme } from "@rneui/themed";
-import BottomTabs from "./navigation/BottomTabs";
-
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -55,15 +52,6 @@ export default function App() {
                   : options.title !== undefined
                     ? options.title
                     : route.name;
-
-              // Render your desired component for each item in the drawer
-              // if (label === 'Home') {
-              //   return (
-              //     <Text key={index} onPress={() => navigation.navigate(route.name)}>
-              //       Home
-              //     </Text>
-              //   );
-              // }
               return (
                 <View style={{ flexDirection: "column", padding: 15 }} key={index}>
                   <View style={{ flexDirection: 'row', justifyContent: "flex-start", alignItems: 'center' }}>
@@ -76,11 +64,6 @@ export default function App() {
                       {label}
                     </Text>
                   </View>
-                  {/* <TouchableOpacity
-                    key={index} onPress={() => navigation.navigate(route.name)}
-                  >
-                    <Text>{label}</Text>
-                  </TouchableOpacity> */}
                 </View>
               );
             })}
@@ -127,6 +110,9 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
+        <StatusBar
+          backgroundColor="#14c6f7"
+        />
         <Drawer.Navigator
           initialRouteName="Home"
           drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -147,7 +133,12 @@ export default function App() {
             })}
           />
           <Drawer.Screen name="All Categories" component={AllCategories} />
-          <Drawer.Screen name="My Account" component={MyAccount} />
+          <Drawer.Screen name="My Account" component={MyAccount}
+            options={({ navigation }) => ({
+              headerShown: false,
+              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Account"} />
+            })}
+          />
           <Drawer.Screen name="My Order" component={MyOrder} />
           <Drawer.Screen name="My Cart" component={MyCart} />
           <Drawer.Screen
@@ -158,10 +149,13 @@ export default function App() {
               headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Notifications"} />
             })}
           />
+          {/* <Drawer.Screen name="Edit Account" component={EditAccoount}
+            options={({ navigation }) => ({
+              headerShown: false,
+              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Edit"} />
+            })}
+          /> */}
         </Drawer.Navigator>
-        <StatusBar
-          backgroundColor="#14c6f7"
-        />
       </NavigationContainer>
     </>
   );

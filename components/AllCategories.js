@@ -101,7 +101,7 @@ function AllCategories() {
                     {
                         categories.map((val, i) => {
                             return (
-                                <View key={i} style={{ margin: 5 }}>
+                                <View key={i} style={{ margin: 5, padding: 5 }}>
                                     <Image source={val.uri} style={styles.itemsImg}></Image>
                                     <Text style={styles.headLines}>{val.label}</Text>
                                 </View>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
     itemsImg: {
         width: 50,
