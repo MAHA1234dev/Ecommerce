@@ -22,7 +22,9 @@ function EditAccoount({ navigation, setOpenEdit }) {
             <ScrollView style={{ backgroundColor: "#61dafb" }}>
                 <View style={{ flexDirection: 'row', justifyContent: "center", alignItems: "center", padding: 25 }}>
                     <ImageBackground
-                        borderRadius={50}
+                        imageStyle={{
+                            borderRadius: 50
+                        }}
                         source={require('../../assets/maha.png')}
                         style={{ height: 70, width: 80, }}
                     >
