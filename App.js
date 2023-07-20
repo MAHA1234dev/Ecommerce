@@ -139,7 +139,12 @@ export default function App() {
               headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Account"} />
             })}
           />
-          <Drawer.Screen name="My Order" component={MyOrder} />
+          <Drawer.Screen name="My Order" component={MyOrder}
+            options={({ navigation }) => ({
+              headerShown: false,
+              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Account"} />
+            })}
+          />
           <Drawer.Screen name="My Cart" component={MyCart} />
           <Drawer.Screen
             name="Notifications"

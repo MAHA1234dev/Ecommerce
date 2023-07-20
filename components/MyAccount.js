@@ -30,7 +30,7 @@ function MyAccount({ navigation }) {
         <>
             {
                 !openEdit ? (
-                    <View style={{}}>
+                    <>
                         <HeaderComp handleNavigate={() => navigation.navigate("Home")} title={"My Account"} />
                         <ScrollView style={{ backgroundColor: "#61dafb" }}>
                             <View style={{ flexDirection: 'row', justifyContent: "space-between", alignItems: "center", padding: 25 }}>
@@ -95,7 +95,7 @@ function MyAccount({ navigation }) {
                                 </Card>
                             </View>
                         </ScrollView>
-                    </View>
+                    </>
                 ) : (
                     <EditAccoount
                         navigation={navigation}
