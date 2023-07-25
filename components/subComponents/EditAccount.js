@@ -25,6 +25,7 @@ function EditAccoount({ navigation, setOpenEdit }) {
                         imageStyle={{
                             borderRadius: 50
                         }}
+                        
                         source={require('../../assets/maha.png')}
                         style={{ height: 70, width: 80, }}
                     >

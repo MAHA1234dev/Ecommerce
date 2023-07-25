@@ -6,25 +6,29 @@ import {
     useTabIndex,
     useTabNavigation,
 } from 'react-native-paper-tabs';
-
+import Deliverd from "./subComponents/Deliverd";
+import ProcessOrder from "./subComponents/ProcessOrder";
+import CancelledOrder from "./subComponents/CancelledOrder";
 
 function MyOrder({ navigation }) {
     return (
         <>
             <HeaderComp handleNavigate={() => navigation.navigate("Home")} title={"My Orders"} />
             <Tabs style={{ backgroundColor: "rgb(233, 248, 250)" }}>
-                <TabScreen label="Explore">
-                    <View style={{}}>
-                        <Text>djsdhghj </Text>
-                        <Text>djsdhghj </Text>
-                        <Text>djsdhghj </Text>
+                <TabScreen label="Deliverd"  >
+                    <View style={styles.body}>
+                        <Deliverd />
                     </View>
                 </TabScreen>
-                <TabScreen label="Flights" >
-                    <View style={{ backgroundColor: '', flex: 1 }} />
+                <TabScreen label="Process" >
+                    <View style={styles.body}>
+                        <ProcessOrder />
+                    </View>
                 </TabScreen>
-                <TabScreen label="Flights" >
-                    <View style={{ backgroundColor: '', flex: 1 }} />
+                <TabScreen label="Cancelled" >
+                    <View style={styles.body}>
+                        <CancelledOrder />
+                    </View>
                 </TabScreen>
             </Tabs>
         </>
@@ -34,8 +38,8 @@ function MyOrder({ navigation }) {
 const styles = StyleSheet.create({
     body: {
         backgroundColor: "#E9F8FA",
-        borderTopEndRadius: 20,
-        borderTopLeftRadius: 20,
+        padding: 10
+
     },
 
 })

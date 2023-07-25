@@ -148,7 +148,7 @@ function Home({ navigation }) {
             </SafeAreaView>
         </ScrollView>
     )
-}
+}   
 
 const styles = StyleSheet.create({
     conatiner: {
