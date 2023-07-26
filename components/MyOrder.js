@@ -1,10 +1,8 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import HeaderComp from "./molecules/HeaderComp";
 import {
     Tabs,
     TabScreen,
-    useTabIndex,
-    useTabNavigation,
 } from 'react-native-paper-tabs';
 import Deliverd from "./subComponents/Deliverd";
 import ProcessOrder from "./subComponents/ProcessOrder";
