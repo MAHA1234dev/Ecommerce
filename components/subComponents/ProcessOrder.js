@@ -40,8 +40,8 @@ function ProcessOrder() {
                 {
                     items.map((val, index) => {
                         return (
-                            <>
-                                <View style={styles.main} key={index}>
+                            <View key={index}>
+                                <View style={styles.main}>
                                     <Text style={styles.header}>{val?.brandName}</Text>
                                     <Text style={styles.silent}>{val?.date}</Text>
                                 </View>
@@ -61,7 +61,7 @@ function ProcessOrder() {
                                     </TouchableOpacity>
                                 </View >
                                 <Divider style={{ marginTop: 10, marginBottom: 10 }} width={1} color={theme?.colors?.primary} />
-                            </>
+                            </View>
                         )
                     })
                 }
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         elevation: 0,
         marginTop: 10,
+        marginBottom: 10
     },
     main: {
         flexDirection: "row",
