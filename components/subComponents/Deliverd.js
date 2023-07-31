@@ -81,8 +81,6 @@ function Deliverd() {
         setIcons(updatedIcons);
     };
 
-    console.log(icons);
-
     return (
         <View>
             {
