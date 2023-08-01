@@ -72,7 +72,7 @@ function Deliverd() {
     const [icons, setIcons] = useState(iconMap);
     const [orderId, setIsOrderID] = useState("");
 
-    const hanleIconPress = (id, name) => {
+    const handleIconPress = (id, name) => {
         setIsOrderID(name);
         const updatedIcons = icons.map((val, i) => ({
             ...val,
@@ -103,7 +103,7 @@ function Deliverd() {
                                                 name={"caret-right"}
                                                 size={15}
                                                 color={"#DDD7D7"}
-                                                onPress={() => hanleIconPress()}
+                                            // onPress={() => hanleIconPress()}
                                             />
                                         </View>
 
@@ -125,7 +125,7 @@ function Deliverd() {
                                                     name={"star"}
                                                     size={25}
                                                     color={(orderId === val?.brandName && item?.color) ? item?.color : "#DDD7D7"}
-                                                    onPress={() => hanleIconPress(item?.id, val?.brandName)}
+                                                    onPress={() => handleIconPress(item?.id, val?.brandName)}
                                                 />
                                             )
                                         })
