@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 import { Divider, useTheme } from "@rneui/themed";
 
-function CancelledOrder() {
+function CancelledOrder({ setToOrderDet }) {
 
     const items = [
         {
@@ -40,20 +40,22 @@ function CancelledOrder() {
                 {
                     items.map((val, index) => {
                         return (
-                            <View key={index}>
-                                <View style={styles.main}>
-                                    <Text style={styles.header}>{val?.brandName}</Text>
-                                    <Text style={styles.silent}>{val?.date}</Text>
-                                </View>
-                                <View style={styles.main}>
+                            <TouchableOpacity onPress={() => setToOrderDet(true)} key={index}>
+                                <View key={index}>
                                     <View style={styles.main}>
-                                        <Text style={styles.silent}> items : </Text>
-                                        <Text style={styles.header}>{val?.qty}</Text>
+                                        <Text style={styles.header}>{val?.brandName}</Text>
+                                        <Text style={styles.silent}>{val?.date}</Text>
                                     </View>
-                                    <Text style={styles.header}>{val?.price}</Text>
+                                    <View style={styles.main}>
+                                        <View style={styles.main}>
+                                            <Text style={styles.silent}> items : </Text>
+                                            <Text style={styles.header}>{val?.qty}</Text>
+                                        </View>
+                                        <Text style={styles.header}>{val?.price}</Text>
+                                    </View>
+                                    <Divider style={{ marginTop: 10, marginBottom: 10 }} width={1} color={theme?.colors?.primary} />
                                 </View>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} width={1} color={theme?.colors?.primary} />
-                            </View>
+                            </TouchableOpacity>
                         )
                     })
                 }

@@ -4,7 +4,7 @@ import { Card, Avatar, Surface } from "react-native-paper";
 import { Divider, useTheme } from "@rneui/themed";
 import Icon from 'react-native-vector-icons/Fontisto';
 
-function Deliverd() {
+function Deliverd({ setToOrderDet }) {
 
     const items = [
         {
@@ -103,7 +103,7 @@ function Deliverd() {
                                                 name={"caret-right"}
                                                 size={15}
                                                 color={"#DDD7D7"}
-                                            // onPress={() => hanleIconPress()}
+                                                onPress={() => setToOrderDet(true)}
                                             />
                                         </View>
 

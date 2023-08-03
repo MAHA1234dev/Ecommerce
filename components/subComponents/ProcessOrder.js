@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { Card } from "react-native-paper";
 import { Divider, useTheme } from "@rneui/themed";
+import OrderDetails from "./OrderDetails";
 
-function ProcessOrder() {
+function ProcessOrder({ setToOrderDet }) {
 
     const items = [
         {
@@ -34,6 +35,7 @@ function ProcessOrder() {
 
     const { theme } = useTheme();
 
+
     return (
         <ScrollView>
             <Card style={styles.subCard} contentStyle={{ padding: 10 }}>
@@ -53,7 +55,7 @@ function ProcessOrder() {
                                     <Text style={styles.header}>{val?.price}</Text>
                                 </View>
                                 <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}>
-                                    <TouchableOpacity style={{ paddingTop: 10 }}>
+                                    <TouchableOpacity style={{ paddingTop: 10 }} onPress={() => setToOrderDet(true)}>
                                         <Text style={{ fontWeight: "500" }}>Details</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{ paddingTop: 10, paddingLeft: 10 }}>
