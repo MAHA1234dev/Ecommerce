@@ -11,11 +11,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MyCart from "./components/MyCart";
 import Notifications from "./components/Notifications";
 import { Divider, useTheme } from "@rneui/themed";
+import PrivacyPolicy from "./components/others/PrivacyPolicy";
+import { useState } from "react";
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+
+  const { theme } = useTheme();
+
   function CustomDrawerContent(props) {
-    const { theme } = useTheme();
     const { state, descriptors, navigation } = props;
     return (
       <View style={{ flex: 1 }}>
@@ -73,11 +77,11 @@ export default function App() {
             <View style={{ flexDirection: "column", padding: 15, marginLeft: 15 }}>
               <Text style={styles.other}>Other</Text>
               <Text style={styles.others}>Terms & conditions</Text>
-              <Text style={styles.others}>Privacy Policy</Text>
+              <Text style={styles.others} onPress={() => navigation.navigate('Privacypolicy')}>Privacy Policy</Text>
             </View>
           </View>
-        </DrawerContentScrollView>
-      </View>
+        </DrawerContentScrollView >
+      </View >
     );
   }
 
@@ -154,12 +158,14 @@ export default function App() {
               headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Notifications"} />
             })}
           />
-          {/* <Drawer.Screen name="Edit Account" component={EditAccoount}
+          <Drawer.Screen
+            name="Privacy Policy"
+            component={PrivacyPolicy}
             options={({ navigation }) => ({
-              headerShown: false,
-              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Edit"} />
+              // headerShown: false,
+              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Privacy Policy"} />
             })}
-          /> */}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </>
