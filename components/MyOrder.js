@@ -10,7 +10,6 @@ import ProcessOrder from "./subComponents/ProcessOrder";
 import CancelledOrder from "./subComponents/CancelledOrder";
 import OrderDetails from "./subComponents/OrderDetails";
 
-
 function MyOrder({ navigation }) {
 
     const [toOrderDet, setToOrderDet] = useState(false);

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     intro: {
-        fontWeight: '500'
+        fontWeight: '500',
     },
     content: {
         marginTop: 5,

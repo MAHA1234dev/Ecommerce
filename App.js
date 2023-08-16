@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { Image, StyleSheet, Text, View, ImageBackground, Platform } from 'react-native';
 import Home from "./components/home";
 import AllCategories from "./components/AllCategories";
 import MyAccount from "./components/MyAccount";
@@ -13,6 +13,7 @@ import Notifications from "./components/Notifications";
 import { Divider, useTheme } from "@rneui/themed";
 import PrivacyPolicy from "./components/others/PrivacyPolicy";
 import { useState } from "react";
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -61,7 +62,7 @@ export default function App() {
                   <View style={{ flexDirection: 'row', justifyContent: "flex-start", alignItems: 'center' }}>
                     <Icon
                       name={`${label === "Home" ? "home" : label === "All Categories" ? "category" :
-                        label === "My Account" ? "account-box" : label === "My Order" ? "https" : label === "My Cart" ? "shopping-basket" : "notifications"}`}
+                        label === "My Account" ? "account-box" : label === "My Order" ? "https" : label === "My Cart" ? "shopping-basket" : label === 'Notifications' ? "notifications" : ""}`}
                       size={25}
                     />
                     <Text style={styles.content} key={index} onPress={() => navigation.navigate(route.name)}>
@@ -77,7 +78,7 @@ export default function App() {
             <View style={{ flexDirection: "column", padding: 15, marginLeft: 15 }}>
               <Text style={styles.other}>Other</Text>
               <Text style={styles.others}>Terms & conditions</Text>
-              <Text style={styles.others} onPress={() => navigation.navigate('Privacypolicy')}>Privacy Policy</Text>
+              <Text style={styles.others} onPress={() => console.log(navigation.navigate('Privacypolicy'))}>Privacy Policy</Text>
             </View>
           </View>
         </DrawerContentScrollView >
@@ -159,15 +160,16 @@ export default function App() {
             })}
           />
           <Drawer.Screen
-            name="Privacy Policy"
+            name="Privacypolicy"
             component={PrivacyPolicy}
-            options={({ navigation }) => ({
+            options={{
               // headerShown: false,
-              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Privacy Policy"} />
-            })}
+              // title: 'Privacy Policy',
+              drawerLabel: () => null, // This hides the screen from the drawer
+            }}
           />
         </Drawer.Navigator>
-      </NavigationContainer>
+      </NavigationContainer >
     </>
   );
 }
