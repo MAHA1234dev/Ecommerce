@@ -1,6 +1,6 @@
-import { Button, Divider, useTheme } from "@rneui/themed";
+import { Divider, useTheme } from "@rneui/themed";
 import { useState } from "react";
-import { ImageBackground, SafeAreaView, Text, TextInput } from "react-native";
+import { ImageBackground, SafeAreaView, Text, TextInput, Button } from "react-native";
 import { View, Modal, StyleSheet } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -82,7 +82,7 @@ function AddressModal({ open, setOpen, setAddressData, address }) {
                         />
                     </SafeAreaView>
                     <Button
-                        color={"rgb(33 197 243)"}
+                        color="#61dafb"
                         title={"Add New Address"}
                         onPress={handleNewAddress}
                     ></Button>

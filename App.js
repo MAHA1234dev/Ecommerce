@@ -12,7 +12,6 @@ import MyCart from "./components/MyCart";
 import Notifications from "./components/Notifications";
 import { Divider, useTheme } from "@rneui/themed";
 import PrivacyPolicy from "./components/others/PrivacyPolicy";
-import { useState } from "react";
 
 const Drawer = createDrawerNavigator();
 
