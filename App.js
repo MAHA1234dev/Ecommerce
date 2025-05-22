@@ -12,12 +12,24 @@ import MyCart from "./components/MyCart";
 import Notifications from "./components/Notifications";
 import { Divider, useTheme } from "@rneui/themed";
 import PrivacyPolicy from "./components/others/PrivacyPolicy";
+import { useState } from "react";
+import Profile from "./components/molecules/Profile";
+import { LoginProvider, useLoginContext } from "./cntextProvider";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
 
+  return (
+    <LoginProvider>
+      <AppWithContext />
+    </LoginProvider>
+  );
+}
+
+function AppWithContext() {
   const { theme } = useTheme();
+  const { userData } = useLoginContext();
 
   function CustomDrawerContent(props) {
     const { state, descriptors, navigation } = props;
@@ -111,65 +123,64 @@ export default function App() {
 
     )
   }
-  return (
-    <>
-      <NavigationContainer>
-        <StatusBar
-          backgroundColor="#14c6f7"
-        />
-        <Drawer.Navigator
-          initialRouteName="Home"
-          drawerContent={(props) => <CustomDrawerContent {...props} />}
-          drawerHideStatusBarOnOpen={true}
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#61dafb',
 
-            },
+  return !userData?.isLoggedIn ? <Profile /> : (
+    <NavigationContainer>
+      <StatusBar
+        backgroundColor="#14c6f7"
+      />
+      <Drawer.Navigator
+        initialRouteName="Home"
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        drawerHideStatusBarOnOpen={true}
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#61dafb',
+
+          },
+        }}
+      >
+        {/* <Drawer.Screen name="Home" component={BottomTabs} /> */}
+        <Drawer.Screen
+          name="Home"
+          component={Home}
+          options={({ navigation }) => ({
+            headerTitle: (props) => <LogoTitle {...props} navigation={navigation} />
+          })}
+        />
+        <Drawer.Screen name="All Categories" component={AllCategories} />
+        <Drawer.Screen name="My Account" component={MyAccount}
+          options={({ navigation }) => ({
+            headerShown: false,
+            headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Account"} />
+          })}
+        />
+        <Drawer.Screen name="My Order" component={MyOrder}
+          options={({ navigation }) => ({
+            headerShown: false,
+            headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Order"} />
+          })}
+        />
+        <Drawer.Screen name="My Cart" component={MyCart} />
+        <Drawer.Screen
+          name="Notifications"
+          component={Notifications}
+          options={({ navigation }) => ({
+            // headerShown : false,
+            headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Notifications"} />
+          })}
+        />
+        <Drawer.Screen
+          name="Privacypolicy"
+          component={PrivacyPolicy}
+          options={{
+            // headerShown: false,
+            // title: 'Privacy Policy',
+            drawerLabel: () => null, // This hides the screen from the drawer
           }}
-        >
-          {/* <Drawer.Screen name="Home" component={BottomTabs} /> */}
-          <Drawer.Screen
-            name="Home"
-            component={Home}
-            options={({ navigation }) => ({
-              headerTitle: (props) => <LogoTitle {...props} navigation={navigation} />
-            })}
-          />
-          <Drawer.Screen name="All Categories" component={AllCategories} />
-          <Drawer.Screen name="My Account" component={MyAccount}
-            options={({ navigation }) => ({
-              headerShown: false,
-              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Account"} />
-            })}
-          />
-          <Drawer.Screen name="My Order" component={MyOrder}
-            options={({ navigation }) => ({
-              headerShown: false,
-              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"My Order"} />
-            })}
-          />
-          <Drawer.Screen name="My Cart" component={MyCart} />
-          <Drawer.Screen
-            name="Notifications"
-            component={Notifications}
-            options={({ navigation }) => ({
-              // headerShown : false,
-              headerTitle: (props) => <RenderHeader {...props} navigation={navigation} title={"Notifications"} />
-            })}
-          />
-          <Drawer.Screen
-            name="Privacypolicy"
-            component={PrivacyPolicy}
-            options={{
-              // headerShown: false,
-              // title: 'Privacy Policy',
-              drawerLabel: () => null, // This hides the screen from the drawer
-            }}
-          />
-        </Drawer.Navigator>
-      </NavigationContainer >
-    </>
+        />
+      </Drawer.Navigator>
+    </NavigationContainer >
   );
 }
 
